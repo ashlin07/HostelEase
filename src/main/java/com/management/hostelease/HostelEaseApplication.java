@@ -1,13 +1,13 @@
-package com.example.test;
+package com.management.hostelease;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class TestApplication {
+public class HostelEaseApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(TestApplication.class, args);
+		SpringApplication.run(HostelEaseApplication.class, args);
 	}
 
 }
