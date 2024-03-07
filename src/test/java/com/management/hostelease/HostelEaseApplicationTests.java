@@ -1,10 +1,10 @@
-package com.example.test;
+package com.management.hostelease;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class TestApplicationTests {
+class HostelEaseApplicationTests {
 
 	@Test
 	void contextLoads() {
