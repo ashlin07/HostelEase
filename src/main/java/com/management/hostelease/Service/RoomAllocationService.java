@@ -1,4 +1,4 @@
-package Service;
+package com.management.hostelease.Service;
 
 public interface RoomAllocationService {
 }

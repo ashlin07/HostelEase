@@ -1,4 +1,4 @@
-package Controller;
+package com.management.hostelease.Controller;
 
 import org.springframework.web.bind.annotation.RestController;
 
