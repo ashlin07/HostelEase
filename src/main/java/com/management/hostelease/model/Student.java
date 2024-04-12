@@ -14,6 +14,8 @@ public class Student {
     private String SRN;
     private String department;
 
+    private String roomNumber;
+
     public Student() {
     }
 
@@ -53,6 +55,12 @@ public class Student {
 
     public void setDepartment(String department) {
         this.department = department;
+    }
+    public String getRoomNumber(String roomNumber){
+        return roomNumber;
+    }
+    public void setRoomNumber(){
+        this.roomNumber = roomNumber;
     }
 }
 
