@@ -1,4 +1,4 @@
-package com.management.hostelease.entity;
+package com.management.hostelease.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
