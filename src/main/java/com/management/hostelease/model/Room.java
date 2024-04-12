@@ -12,23 +12,27 @@ public class Room {
     private String roomNumber;
     private String roomType;
     private String roomPrice;
+    private int roomCapacity;
     private boolean isBooked;
 
 
-    public Room(int id, String roomNumber, String roomType,String roomPrice, boolean isBooked) {
+    public Room(int id, String roomNumber, String roomType,String roomPrice, boolean isBooked, int roomCapacity){
         this.id = id;
         this.roomNumber = roomNumber;
         this.roomType = roomType;
         this.isBooked = isBooked;
         this.roomPrice = roomPrice;
+        this.roomCapacity = roomCapacity;
 
     }
 
-    public Room(String roomNumber, String roomType,String roomPrice,boolean isBooked) {
+    public Room(String roomNumber, String roomType,String roomPrice,boolean isBooked, int roomCapacity) {
         this.roomNumber = roomNumber;
         this.roomType = roomType;
         this.isBooked = isBooked;
         this.roomPrice = roomPrice;
+        this.roomCapacity = roomCapacity;
+
 
     }
 

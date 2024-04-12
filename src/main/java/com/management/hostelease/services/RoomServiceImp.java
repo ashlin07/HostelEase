@@ -1,9 +1,44 @@
 package com.management.hostelease.services;
 
+import com.management.hostelease.model.Room;
 import com.management.hostelease.repository.RoomRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.List;
+import java.util.Optional;
+import com.management.hostelease.model.Room;
+import com.management.hostelease.repository.RoomRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+
+
 public class RoomServiceImp implements RoomService{
-    @Autowired
-    private RoomRepository RoomRepository;
-}
+        @Autowired
+        private RoomRepository roomRepository;
+
+        public Room addRoom(Room room) {
+            return roomRepository.save(room);
+        }
+
+        public Room bookRoom(int id) {
+            Room room = roomRepository.findById(id).orElseThrow(() -> new RuntimeException("Room not found"));
+            room.setBooked(true);
+            return roomRepository.save(room);
+        }
+
+        public List<Room> getAllRooms() {
+            return roomRepository.findAll();
+        }
+
+        public Optional<Room> getRoomById(int id) {
+            return roomRepository.findById(id);
+        }
+
+        public Room updateRoom(Room room) {
+            return roomRepository.save(room);
+        }
+
+        public void deleteRoom(int id) {
+            roomRepository.deleteById(id);
+        }
+    }
+
