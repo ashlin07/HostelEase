@@ -1,5 +1,6 @@
 package com.management.hostelease.views.list;
 
+import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.html.Paragraph;
@@ -19,7 +20,7 @@ public class HomePage extends VerticalLayout {
         });
 
         Button messManagementButton = new Button("Manage Mess", event -> {
-            // Navigate to Mess Management Page
+            UI.getCurrent().navigate(MessView.class);
         });
 
         add(title, welcomeText, roomManagementButton, messManagementButton);
