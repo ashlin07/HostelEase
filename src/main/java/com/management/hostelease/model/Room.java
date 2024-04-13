@@ -11,12 +11,12 @@ public class Room {
     private int id;
     private String roomNumber;
     private String roomType;
-    private String roomPrice;
+    private int roomPrice;
     private int roomCapacity;
     private boolean isBooked;
 
 
-    public Room(int id, String roomNumber, String roomType,String roomPrice, boolean isBooked, int roomCapacity){
+    public Room(int id, String roomNumber, String roomType,int roomPrice, boolean isBooked, int roomCapacity){
         this.id = id;
         this.roomNumber = roomNumber;
         this.roomType = roomType;
@@ -26,7 +26,7 @@ public class Room {
 
     }
 
-    public Room(String roomNumber, String roomType,String roomPrice,boolean isBooked, int roomCapacity) {
+    public Room(String roomNumber, String roomType,int roomPrice,boolean isBooked, int roomCapacity) {
         this.roomNumber = roomNumber;
         this.roomType = roomType;
         this.isBooked = isBooked;
@@ -70,17 +70,18 @@ public class Room {
         isBooked = booked;
     }
 
-    public String getRoomPrice() {
+    public int getRoomPrice() {
         return roomPrice;
     }
 
-    public void setRoomPrice(String roomPrice) {
+    public void setRoomPrice(int roomPrice) {
         this.roomPrice = roomPrice;
     }
 
-
-
-
-
-
+    public int getRoomCapacity() {
+        return roomCapacity;
+    }
+    public void setRoomCapacity(int roomCapacity) {
+        this.roomCapacity = roomCapacity;
+    }
 }

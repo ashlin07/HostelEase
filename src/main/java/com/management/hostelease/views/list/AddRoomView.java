@@ -6,6 +6,7 @@ import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.component.textfield.NumberField;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.router.PageTitle;
@@ -19,7 +20,8 @@ public class AddRoomView extends VerticalLayout {
 
         TextField roomNameField = new TextField("Room Name");
         TextField roomTypeField = new TextField("Room Type");
-        TextField roomPriceField = new TextField("Room Price");
+        NumberField roomPriceField = new NumberField("Room Price");
+        NumberField roomCapacityField = new NumberField("Room Capacity");
 
         formLayout.add(roomNameField, roomTypeField, roomPriceField);
 
@@ -27,8 +29,9 @@ public class AddRoomView extends VerticalLayout {
             Room room = new Room();
             room.setRoomNumber(roomNameField.getValue());
             room.setRoomType(roomTypeField.getValue());
-            room.setRoomPrice(String.valueOf(Double.parseDouble(roomPriceField.getValue())));
-
+            room.setRoomPrice(roomPriceField.getValue().intValue());
+            room.setBooked(false);
+            room.setRoomCapacity(roomCapacityField.getValue().intValue());
             RestTemplate restTemplate = new RestTemplate();
             restTemplate.postForObject("http://localhost:8080/api/room", room, Room.class);
 
