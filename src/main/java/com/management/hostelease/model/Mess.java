@@ -6,7 +6,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 @Entity
-public abstract class Mess {
+public class Mess {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -56,7 +56,7 @@ public abstract class Mess {
     }
 
     // Abstract method to serve food
-    public abstract void serveFood();
+    public void serveFood() {}
 }
 
 class VegMess extends Mess {
