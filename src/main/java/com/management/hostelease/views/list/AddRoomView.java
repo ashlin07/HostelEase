@@ -23,7 +23,7 @@ public class AddRoomView extends VerticalLayout {
         NumberField roomPriceField = new NumberField("Room Price");
         NumberField roomCapacityField = new NumberField("Room Capacity");
 
-        formLayout.add(roomNameField, roomTypeField, roomPriceField);
+        formLayout.add(roomNameField, roomTypeField, roomPriceField,roomCapacityField);
 
         Button addButton = new Button("Add Room", clickEvent -> {
             Room room = new Room();

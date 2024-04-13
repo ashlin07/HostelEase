@@ -1,8 +1,5 @@
 package com.management.hostelease.model;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
 public class Room {
@@ -11,26 +8,28 @@ public class Room {
     private int id;
     private String roomNumber;
     private String roomType;
-    private int roomPrice;
+
     private int roomCapacity;
     private boolean isBooked;
+    @ManyToOne
+    private Block block;
 
 
-    public Room(int id, String roomNumber, String roomType,int roomPrice, boolean isBooked, int roomCapacity){
+    public Room(int id, String roomNumber, String roomType,Block block, boolean isBooked, int roomCapacity){
         this.id = id;
         this.roomNumber = roomNumber;
         this.roomType = roomType;
         this.isBooked = isBooked;
-        this.roomPrice = roomPrice;
+        this.block=block;
         this.roomCapacity = roomCapacity;
 
     }
 
-    public Room(String roomNumber, String roomType,int roomPrice,boolean isBooked, int roomCapacity) {
+    public Room(String roomNumber, String roomType,Block block,boolean isBooked, int roomCapacity) {
         this.roomNumber = roomNumber;
         this.roomType = roomType;
         this.isBooked = isBooked;
-        this.roomPrice = roomPrice;
+        this.block=block;
         this.roomCapacity = roomCapacity;
 
 
@@ -71,13 +70,8 @@ public class Room {
     }
 
     public int getRoomPrice() {
-        return roomPrice;
+        return block.getPrice();
     }
-
-    public void setRoomPrice(int roomPrice) {
-        this.roomPrice = roomPrice;
-    }
-
     public int getRoomCapacity() {
         return roomCapacity;
     }

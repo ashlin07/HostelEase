@@ -30,12 +30,8 @@ public class RoomServiceImp implements RoomService{
             return roomRepository.findAll();
         }
 
-        public Optional<Room> getRoomById(int id) {
-            return roomRepository.findById(id);
-        }
-
-        public Room updateRoom(Room room) {
-            return roomRepository.save(room);
+        public List<Room> getAvailableRooms() {
+            return roomRepository.findByIsBooked(false);
         }
 
         public void deleteRoom(int id) {

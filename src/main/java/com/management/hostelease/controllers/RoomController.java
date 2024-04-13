@@ -24,4 +24,12 @@ public class RoomController {
         return roomService.addRoom(room);
 
     }
+    @PostMapping("/bookRoom")
+    public void bookRoom(@RequestParam int id) {
+        roomService.bookRoom(id);
+    }
+    @GetMapping("/availableRooms")
+    public List<Room> getAvailableRooms() {
+        return roomService.getAvailableRooms();
+    }
 }
