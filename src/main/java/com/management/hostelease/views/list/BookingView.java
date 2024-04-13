@@ -13,11 +13,11 @@ import org.springframework.web.client.RestTemplate;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
-private Button createBookButton(Room room) {
+/* private Button createBookButton(Room room) {
     return new Button("Book", clickEvent -> {
         restTemplate.postForObject("http://localhost:8080/api/bookRoom", room.getId(), Void.class);
     });
-}
+} */
 @Route(value = "booking")
 @PageTitle("Booking | Hostel Management System")
 public class BookingView extends VerticalLayout {
@@ -27,8 +27,9 @@ public class BookingView extends VerticalLayout {
     private final RestTemplate restTemplate;
 
     @Autowired
-    public BookingView(RoomService roomService) {
+    public BookingView(RoomService roomService, RestTemplate restTemplate) {
         this.roomService = roomService;
+        this.restTemplate = restTemplate;
         this.grid = new Grid<>(Room.class);
         add(grid);
         listAvailableRooms();

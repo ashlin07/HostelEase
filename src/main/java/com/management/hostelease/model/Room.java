@@ -78,4 +78,7 @@ public class Room {
     public void setRoomCapacity(int roomCapacity) {
         this.roomCapacity = roomCapacity;
     }
+
+    public void setRoomPrice(int i) {
+    }
 }
