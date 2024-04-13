@@ -1,6 +1,1 @@
-package com.management.hostelease.services;
-
-public class MessServiceImp {
-
-
-}
+package com.management.hostelease.services;import com.management.hostelease.model.Mess;import com.management.hostelease.repository.MessRepository;import org.springframework.beans.factory.annotation.Autowired;import org.springframework.stereotype.Service;import java.util.List;@Servicepublic class MessServiceImp implements MessService {    @Autowired    private MessRepository messRepository;    @Override    public Mess addMess(Mess mess) {        return messRepository.save(mess);    }    @Override    public List<Mess> getAllMesses() {        return messRepository.findAll();    }    @Override    public Mess getMessById(int id) {        return messRepository.findById(id).orElse(null);    }    @Override    public void deleteMess(int id) {        messRepository.deleteById(id);    }}

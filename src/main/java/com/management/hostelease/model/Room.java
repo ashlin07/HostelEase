@@ -80,5 +80,6 @@ public class Room {
     }
 
     public void setRoomPrice(int i) {
+
     }
 }
