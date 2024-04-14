@@ -1,8 +1,10 @@
 package com.management.hostelease.views.list;
 
 
+import com.management.hostelease.model.Block;
 import com.management.hostelease.model.Room;
 import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
@@ -18,21 +20,26 @@ public class AddRoomView extends VerticalLayout {
     public AddRoomView() {
         FormLayout formLayout = new FormLayout();
 
-        TextField roomNameField = new TextField("Room Name");
-        TextField roomTypeField = new TextField("Room Type");
-        NumberField roomPriceField = new NumberField("Room Price");
+        TextField roomNumberField = new TextField("Room Number");
+        ComboBox<String> roomTypeField = new ComboBox<>("Room Type");
+        roomTypeField.setItems("3 sharing", "2 sharing", "single");
         NumberField roomCapacityField = new NumberField("Room Capacity");
 
-        formLayout.add(roomNameField, roomTypeField, roomPriceField,roomCapacityField);
+        RestTemplate restTemplate = new RestTemplate();
+        Block[] blocks = restTemplate.getForObject("http://localhost:8080/api/block", Block[].class);
+        ComboBox<Block> blockField = new ComboBox<>("Block");
+        blockField.setItems(blocks);
+        blockField.setItemLabelGenerator(Block::getName); // Assuming Block has a getName method
+
+        formLayout.add(roomNumberField, roomTypeField, roomCapacityField, blockField);
 
         Button addButton = new Button("Add Room", clickEvent -> {
             Room room = new Room();
-            room.setRoomNumber(roomNameField.getValue());
+            room.setRoomNumber(roomNumberField.getValue());
             room.setRoomType(roomTypeField.getValue());
-            room.setRoomPrice(roomPriceField.getValue().intValue());
-            room.setBooked(false);
             room.setRoomCapacity(roomCapacityField.getValue().intValue());
-            RestTemplate restTemplate = new RestTemplate();
+            room.setBlock(blockField.getValue());
+
             restTemplate.postForObject("http://localhost:8080/api/room", room, Room.class);
 
             Notification.show("Room added successfully");

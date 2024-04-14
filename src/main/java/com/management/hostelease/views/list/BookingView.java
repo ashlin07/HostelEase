@@ -1,10 +1,15 @@
 package com.management.hostelease.views.list;
 
+import com.management.hostelease.model.Payment;
 import com.management.hostelease.model.Room;
 import com.management.hostelease.services.RoomService;
 import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.dialog.Dialog;
+import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.component.select.Select;
+import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.router.PageTitle;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,7 +48,27 @@ public class BookingView extends VerticalLayout {
     }
     private Button createBookButton(Room room) {
         return new Button("Book", clickEvent -> {
-            restTemplate.postForObject("http://localhost:8080/api/bookRoom", room.getId(), Void.class);
+            Dialog paymentDialog = new Dialog();
+            FormLayout paymentForm = new FormLayout();
+
+            TextField studentIdField = new TextField("Student ID");
+            Select<String> formOfPaymentField = new Select<>();
+            formOfPaymentField.setLabel("Form of Payment");
+            formOfPaymentField.setItems("UPI", "Credit", "Debit");
+
+            Button submitButton = new Button("Submit", event -> {
+                Payment payment = new Payment();
+                payment.setRoomId(room.getId());
+                payment.setStudentId(Integer.parseInt(studentIdField.getValue()));
+                payment.setFormOfPayment(formOfPaymentField.getValue());
+
+                restTemplate.postForObject("http://localhost:8080/api/bookRoom", payment, Void.class);
+                paymentDialog.close();
+            });
+
+            paymentForm.add(studentIdField, formOfPaymentField, submitButton);
+            paymentDialog.add(paymentForm);
+            paymentDialog.open();
         });
     }
 

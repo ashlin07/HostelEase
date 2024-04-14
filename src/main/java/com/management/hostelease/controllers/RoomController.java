@@ -1,5 +1,6 @@
 package com.management.hostelease.controllers;
 
+import com.management.hostelease.model.Payment;
 import com.management.hostelease.model.Room;
 import com.management.hostelease.services.RoomService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,8 +26,8 @@ public class RoomController {
 
     }
     @PostMapping("/bookRoom")
-    public void bookRoom(@RequestParam int id) {
-        roomService.bookRoom(id);
+    public Room bookRoom(@RequestBody Payment payment) {
+        return roomService.bookRoom(payment);
     }
     @GetMapping("/availableRooms")
     public List<Room> getAvailableRooms() {

@@ -1,9 +1,6 @@
 package com.management.hostelease.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
 public class Student {
@@ -14,7 +11,10 @@ public class Student {
     private String SRN;
     private String department;
 
-    private String roomNumber;
+    @ManyToOne
+    private Room room;
+
+
 
     public Student() {
     }
@@ -56,11 +56,13 @@ public class Student {
     public void setDepartment(String department) {
         this.department = department;
     }
-    public String getRoomNumber(String roomNumber){
-        return roomNumber;
+
+    public Room getRoom() {
+        return room;
     }
-    public void setRoomNumber(){
-        this.roomNumber = roomNumber;
+
+    public void setRoom(Room room) {
+        this.room = room;
     }
 }
 

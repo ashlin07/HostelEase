@@ -1,6 +1,9 @@
 package com.management.hostelease.model;
 import jakarta.persistence.*;
 
+import java.util.List;
+import com.management.hostelease.model.Block;
+
 @Entity
 public class Room {
     @Id
@@ -13,6 +16,9 @@ public class Room {
     private boolean isBooked;
     @ManyToOne
     private Block block;
+    @OneToMany(mappedBy = "room", cascade = CascadeType.ALL)
+    private List<Student> students;
+
 
 
     public Room(int id, String roomNumber, String roomType,Block block, boolean isBooked, int roomCapacity){
@@ -31,6 +37,7 @@ public class Room {
         this.isBooked = isBooked;
         this.block=block;
         this.roomCapacity = roomCapacity;
+
 
 
     }
@@ -81,5 +88,18 @@ public class Room {
 
     public void setRoomPrice(int i) {
 
+    }
+    public List<Student> getStudents() {
+        return students;
+    }
+
+    public void setStudents(List<Student> students) {
+        this.students = students;
+    }
+    public void setBlock(Block block) {
+        this.block = block;
+    }
+    public Block getBlock() {
+        return block;
     }
 }
