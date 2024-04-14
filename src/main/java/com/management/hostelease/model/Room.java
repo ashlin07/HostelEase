@@ -1,6 +1,8 @@
 package com.management.hostelease.model;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import com.management.hostelease.model.Block;
 
@@ -16,8 +18,9 @@ public class Room {
     private boolean isBooked;
     @ManyToOne
     private Block block;
-    @OneToMany(mappedBy = "room", cascade = CascadeType.ALL)
-    private List<Student> students;
+
+
+    private List<String> students=new ArrayList<>();;
 
 
 
@@ -89,11 +92,12 @@ public class Room {
     public void setRoomPrice(int i) {
 
     }
-    public List<Student> getStudents() {
+    public List<String> getStudents() {
         return students;
     }
 
-    public void setStudents(List<Student> students) {
+    public void setStudents(List<String> students) {
+
         this.students = students;
     }
     public void setBlock(Block block) {

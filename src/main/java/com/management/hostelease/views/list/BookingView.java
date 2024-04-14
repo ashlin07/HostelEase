@@ -18,29 +18,26 @@ import org.springframework.web.client.RestTemplate;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
-/* private Button createBookButton(Room room) {
-    return new Button("Book", clickEvent -> {
-        restTemplate.postForObject("http://localhost:8080/api/bookRoom", room.getId(), Void.class);
-    });
-} */
-@Route(value = "booking")
+
+@Route(value ="booking")
 @PageTitle("Booking | Hostel Management System")
 public class BookingView extends VerticalLayout {
 
-    private final RoomService roomService;
+
     private final Grid<Room> grid;
     private final RestTemplate restTemplate;
 
-    @Autowired
-    public BookingView(RoomService roomService, RestTemplate restTemplate) {
-        this.roomService = roomService;
-        this.restTemplate = restTemplate;
+
+
+    public BookingView() {
         this.grid = new Grid<>(Room.class);
+        this.restTemplate = new RestTemplate();
         add(grid);
         listAvailableRooms();
     }
 
     private void listAvailableRooms() {
+
         Room[] rooms = restTemplate.getForObject("http://localhost:8080/api/availableRooms", Room[].class);
         List<Room> availableRooms = Arrays.asList(rooms != null ? rooms : new Room[0]);
         grid.setItems(availableRooms);
@@ -61,7 +58,7 @@ public class BookingView extends VerticalLayout {
                 payment.setRoomId(room.getId());
                 payment.setStudentId(Integer.parseInt(studentIdField.getValue()));
                 payment.setFormOfPayment(formOfPaymentField.getValue());
-
+                RestTemplate restTemplate=new RestTemplate();
                 restTemplate.postForObject("http://localhost:8080/api/bookRoom", payment, Void.class);
                 paymentDialog.close();
             });

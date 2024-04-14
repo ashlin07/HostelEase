@@ -16,13 +16,16 @@ public class HomePage extends VerticalLayout {
         Paragraph welcomeText = new Paragraph("Manage your hostel rooms, mess, and more efficiently.");
 
         Button roomManagementButton = new Button("Manage Rooms", event -> {
-            // Navigate to Room Management Page
+            UI.getCurrent().navigate(RoomListView.class);// Navigate to Room Management Page
+        });
+        Button bookingManagementButton = new Button("BookRoom", event -> {
+            UI.getCurrent().navigate(BookingView.class);// Navigate to Room Management Page
         });
 
         Button messManagementButton = new Button("Manage Mess", event -> {
             UI.getCurrent().navigate(MessView.class);
         });
 
-        add(title, welcomeText, roomManagementButton, messManagementButton);
+        add(title, welcomeText, roomManagementButton, messManagementButton,bookingManagementButton);
     }
 }

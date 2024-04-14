@@ -19,7 +19,9 @@ import org.springframework.stereotype.Service;
 public class RoomServiceImp implements RoomService{
         @Autowired
         private RoomRepository roomRepository;
+        @Autowired
         private StudentRepository studentRepository;
+        @Autowired
         private PaymentRepository paymentRepository;
         public Room addRoom(Room room) {
 
@@ -45,7 +47,8 @@ public class RoomServiceImp implements RoomService{
         }
 
         Student student = studentOptional.get();
-        room.getStudents().add(student);
+
+        room.getStudents().add(student.getName());
         student.setRoom(room);
 
         room.setRoomCapacity(room.getRoomCapacity() - 1);

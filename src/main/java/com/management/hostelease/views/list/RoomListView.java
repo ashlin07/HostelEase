@@ -1,5 +1,7 @@
 package com.management.hostelease.views.list;
 import com.management.hostelease.model.Room;
+import com.vaadin.flow.component.UI;
+import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.Route;
@@ -28,7 +30,10 @@ public class RoomListView extends VerticalLayout {
         grid.addColumn(room -> room.getBlock().getName()).setHeader("Block");
         grid.addColumn(room -> room.getBlock().getPrice()).setHeader("Price");
         grid.addColumn(room -> room.isBooked() ? "Not Available" : "Available").setHeader("Availability");
-        grid.addColumn(room -> room.getStudents().stream().map(student -> student.getName()).collect(Collectors.joining(", "))).setHeader("Students");
-        add(grid);
+        grid.addColumn(room -> room.getStudents() != null ? String.join(", ", room.getStudents()) : "Not Booked").setHeader("Student Names");
+        Button addRoomButton = new Button("Add Rooms", event -> {
+            UI.getCurrent().navigate(AddRoomView.class);// Navigate to Room Management Page
+        });
+        add(grid,addRoomButton);
     }
 }
