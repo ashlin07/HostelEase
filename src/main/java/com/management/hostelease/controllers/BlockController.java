@@ -1,9 +1,7 @@
 package com.management.hostelease.controllers;
 
-import com.management.hostelease.model.Block;
 import com.management.hostelease.services.BlockService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

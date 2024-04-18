@@ -1,6 +1,5 @@
 package com.management.hostelease.views.list;
 
-import com.management.hostelease.model.Block;
 import com.management.hostelease.services.BlockService;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;

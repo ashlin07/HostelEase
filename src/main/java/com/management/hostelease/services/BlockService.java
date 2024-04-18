@@ -1,13 +1,10 @@
 package com.management.hostelease.services;
 
 import com.management.hostelease.model.Block;
+import com.management.hostelease.model.Room;
 
 import java.util.List;
 
 public interface BlockService {
-    public List<Block> getAllBlocks();
-    public Block addBlock(Block block);
-
-    public Block updateBlock(Block block);
-    public void deleteBlock(int id);
+    void addRoom(Block block, Room room);
 }

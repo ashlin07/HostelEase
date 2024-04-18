@@ -1,7 +1,6 @@
 package com.management.hostelease.views.list;
 
 
-import com.management.hostelease.model.Block;
 import com.management.hostelease.model.Room;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.combobox.ComboBox;

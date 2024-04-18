@@ -1,47 +1,36 @@
 package com.management.hostelease.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Block {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
     private String name;
-    private int price;
 
-    public Block(int id, String name, int price) {
-        this.id = id;
-        this.name = name;
-        this.price = price;
-    }
-    public Block(){
+    @OneToMany(mappedBy = "block", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Room> rooms;
 
+    public Block() {
+        this.rooms = new ArrayList<>();
     }
-    public Block(String name, int price) {
+    public Block(String name) {
         this.name = name;
-        this.price = price;
+        this.rooms = new ArrayList<>();
     }
-    public int getId() {
-        return id;
+
+    // getters and setters
+
+    public void addRoom(Room room) {
+        this.rooms.add(room);
+        room.setBlock(this);
     }
-    public void setId(int id) {
-        this.id = id;
+
+    public void removeRoom(Room room) {
+        this.rooms.remove(room);
+        room.setBlock(null);
     }
-    public String getName() {
-        return name;
-    }
-    public void setName(String name) {
-        this.name = name;
-    }
-    public int getPrice() {
-        return price;
-    }
-    public void setPrice(int price) {
-        this.price = price;
-    }
-    // constructors, getters and setters
 }

@@ -1,67 +1,77 @@
 package com.management.hostelease.model;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+
+
 import jakarta.persistence.*;
+
 
 import java.util.ArrayList;
 import java.util.List;
-import com.management.hostelease.model.Block;
 
 @Entity
 public class Room {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-    private String roomNumber;
-    private String roomType;
-
-    private int roomCapacity;
-    private boolean isBooked;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+    private int roomNumber;
     @ManyToOne
+    @JoinColumn(name = "block_id")
     private Block block;
+    private String roomType;
+    private int capacity;
+    private boolean isBooked;
 
-
-    private List<String> students=new ArrayList<>();;
-
-
-
-    public Room(int id, String roomNumber, String roomType,Block block, boolean isBooked, int roomCapacity){
-        this.id = id;
-        this.roomNumber = roomNumber;
-        this.roomType = roomType;
-        this.isBooked = isBooked;
-        this.block=block;
-        this.roomCapacity = roomCapacity;
-
-    }
-
-    public Room(String roomNumber, String roomType,Block block,boolean isBooked, int roomCapacity) {
-        this.roomNumber = roomNumber;
-        this.roomType = roomType;
-        this.isBooked = isBooked;
-        this.block=block;
-        this.roomCapacity = roomCapacity;
-
-
-
-    }
+    @ElementCollection
+    private List<String> students;
 
     public Room() {
+        this.students = new ArrayList<>();
     }
 
-    public int getId() {
+    public Room(int roomNumber, Block block, String roomType, int capacity) {
+        this.roomNumber = roomNumber;
+        this.block = block;
+        this.roomType = roomType;
+        this.capacity = capacity;
+        this.isBooked = false;
+        this.students = new ArrayList<>();
+    }
+
+    public void addStudent(String student) {
+        if (students.size() < capacity) {
+            students.add(student);
+        } else {
+            System.out.println("Room is already at full capacity.");
+        }
+    }
+
+    public void removeStudent(String student) {
+        students.remove(student);
+    }
+
+    // Getters and setters
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public String getRoomNumber() {
+    public int getRoomNumber() {
         return roomNumber;
     }
 
-    public void setRoomNumber(String roomNumber) {
+    public void setRoomNumber(int roomNumber) {
         this.roomNumber = roomNumber;
+    }
+
+    public Block getBlock() {
+        return block;
+    }
+
+    public void setBlock(Block block) {
+        this.block = block;
     }
 
     public String getRoomType() {
@@ -72,38 +82,27 @@ public class Room {
         this.roomType = roomType;
     }
 
+    public int getCapacity() {
+        return capacity;
+    }
+
+    public void setCapacity(int capacity) {
+        this.capacity = capacity;
+    }
+
     public boolean isBooked() {
         return isBooked;
     }
+
     public void setBooked(boolean booked) {
         isBooked = booked;
     }
 
-    public int getRoomPrice() {
-        return block.getPrice();
-    }
-    public int getRoomCapacity() {
-        return roomCapacity;
-    }
-    public void setRoomCapacity(int roomCapacity) {
-        this.roomCapacity = roomCapacity;
-    }
-
-    public void setRoomPrice(int i) {
-
-    }
     public List<String> getStudents() {
         return students;
     }
 
     public void setStudents(List<String> students) {
-
         this.students = students;
-    }
-    public void setBlock(Block block) {
-        this.block = block;
-    }
-    public Block getBlock() {
-        return block;
     }
 }

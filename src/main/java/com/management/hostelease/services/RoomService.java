@@ -1,16 +1,9 @@
 package com.management.hostelease.services;
 
-import com.management.hostelease.model.Payment;
 import com.management.hostelease.model.Room;
 
-import java.util.List;
-import java.util.Optional;
-
 public interface RoomService {
-    Room addRoom(Room room);
-    Room bookRoom(Payment payment);
-    List<Room> getAllRooms();
-
-    void deleteRoom(int id);
-    List<Room> getAvailableRooms();
+    void addStudent(Room room, String student);
+    void removeStudent(Room room, String student);
+    void bookRoom(Room room);
 }
