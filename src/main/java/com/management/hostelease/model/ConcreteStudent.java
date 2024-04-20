@@ -24,7 +24,9 @@ public class ConcreteStudent implements Student{
 
     public int getRoomNumber() { return roomNumber; }
 
-
+    public void setRoomNumber(int roomNumber){
+        this.roomNumber = roomNumber;
+    }
     // Static nested class: ConcreteStudentBuilder
     static class ConcreteStudentBuilder implements StudentBuilder {
         private String name;

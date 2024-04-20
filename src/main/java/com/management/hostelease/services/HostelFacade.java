@@ -52,4 +52,7 @@ public class HostelFacade {
     public List<Room> showAvailableRooms() {
         return roomService.showAllAvailableRooms();
     }
+    public List<Block> getAllBlocks() {
+        return blockService.getAllBlocks();
+    }
 }

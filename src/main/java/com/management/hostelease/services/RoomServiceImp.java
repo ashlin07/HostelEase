@@ -1,7 +1,9 @@
 package com.management.hostelease.services;
 
+import com.management.hostelease.model.ConcreteStudent;
 import com.management.hostelease.model.Room;
 import com.management.hostelease.repository.RoomRepository;
+import com.management.hostelease.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,6 +13,8 @@ import java.util.List;
 public class RoomServiceImp implements RoomService {
     @Autowired
     private RoomRepository roomRepository;
+    @Autowired
+    private StudentRepository studentRepository;
     @Override
     public void addStudent(Room room, String student) {
         // Implementation goes here
@@ -33,9 +37,13 @@ public class RoomServiceImp implements RoomService {
     }
 
     @Override
-    public Room bookRoom(Room room, String student) {
+    public Room bookRoom(Room room, String studentName) {
+        ConcreteStudent student = studentRepository.findByName(studentName);
+
+        // Set the student's room number
+        student.setRoomNumber(room.getRoomNumber());
         // Implementation goes here
-        addStudent(room, student);
+        addStudent(room, studentName);
 
         // Reduce the capacity by 1
         room.setCapacity(room.getCapacity() - 1);

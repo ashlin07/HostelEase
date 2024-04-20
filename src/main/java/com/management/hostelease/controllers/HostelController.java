@@ -11,7 +11,7 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping("/hostel")
+@RequestMapping("/api")
 public class HostelController {
 
     private final HostelFacade hostelFacade;
@@ -25,7 +25,10 @@ public class HostelController {
     public Block addBlock(@RequestParam String blockName, @RequestParam int price) {
         return hostelFacade.addBlock(blockName, price);
     }
-
+    @GetMapping("/blocks")
+    public List<Block> getAllBlocks() {
+        return hostelFacade.getAllBlocks();
+    }
     @PostMapping("/room")
     public Room addRoom(@RequestParam String blockName, @RequestParam RoomType roomType, @RequestParam int roomNumber, @RequestParam int capacity) {
         return hostelFacade.addRoom(blockName, roomType, roomNumber, capacity);
