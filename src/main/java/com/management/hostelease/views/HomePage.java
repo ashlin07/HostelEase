@@ -1,14 +1,17 @@
 package com.management.hostelease.views;
 
 import com.vaadin.flow.component.applayout.AppLayout;
+import com.vaadin.flow.component.applayout.DrawerToggle;
 import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.html.Nav;
 import com.vaadin.flow.component.html.UnorderedList;
 import com.vaadin.flow.component.html.ListItem;
 import com.vaadin.flow.component.html.Anchor;
+import com.vaadin.flow.component.html.Image;
+import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.Route;
 
-@Route("/homepage")
+@Route("homepage")
 public class HomePage extends AppLayout {
 
     public HomePage() {
@@ -23,7 +26,15 @@ public class HomePage extends AppLayout {
         list.add(roomItem, messItem, attendanceItem);
         nav.add(list);
 
-        addToNavbar(title);
-        setContent(nav);
+        addToNavbar(new DrawerToggle(), title);
+        addToDrawer(nav);
+
+        VerticalLayout contentLayout = new VerticalLayout();
+        contentLayout.add(
+            // Add your main image here
+            new Image("/hostel.jpg", "Main Image")
+            
+        );
+        setContent(contentLayout);
     }
 }
