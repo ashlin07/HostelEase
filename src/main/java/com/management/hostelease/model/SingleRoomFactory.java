@@ -9,7 +9,7 @@ public class SingleRoomFactory implements RoomFactory {
             throw new IllegalArgumentException("Invalid room type for SingleRoomFactory");
         }
         int capacity= roomType.getDefaultCapacity();
-        return new Room(roomNumber, block, "Single", capacity);
+        return new Room(roomNumber,block,"Single",capacity);
     }
     @Override
     public RoomType getRoomType() {

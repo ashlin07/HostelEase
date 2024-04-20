@@ -13,24 +13,5 @@ import java.util.List;
 @RequestMapping("/api")
 public class RoomController {
 
-    @Autowired
-    private RoomService roomService;
 
-    @GetMapping("/room")
-    public List<Room> getAllRooms() {
-        return roomService.getAllRooms();
-    }
-    @PostMapping("/room")
-    public Room addRoom(@RequestBody Room room) {
-        return roomService.addRoom(room);
-
-    }
-    @PostMapping("/bookRoom")
-    public Room bookRoom(@RequestBody Payment payment) {
-        return roomService.bookRoom(payment);
-    }
-    @GetMapping("/availableRooms")
-    public List<Room> getAvailableRooms() {
-        return roomService.getAvailableRooms();
-    }
 }

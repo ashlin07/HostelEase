@@ -26,27 +26,18 @@ public class Room {
     public Room() {
         this.students = new ArrayList<>();
     }
-
-    public Room(int roomNumber, Block block, String roomType, int capacity) {
+    public Room(int roomNumber,Block block,String roomType,int capacity) {
         this.roomNumber = roomNumber;
         this.block = block;
         this.roomType = roomType;
         this.capacity = capacity;
-        this.isBooked = false;
         this.students = new ArrayList<>();
+
     }
 
-    public void addStudent(String student) {
-        if (students.size() < capacity) {
-            students.add(student);
-        } else {
-            System.out.println("Room is already at full capacity.");
-        }
-    }
 
-    public void removeStudent(String student) {
-        students.remove(student);
-    }
+
+
 
     // Getters and setters
 
@@ -90,7 +81,7 @@ public class Room {
         this.capacity = capacity;
     }
 
-    public boolean isBooked() {
+    public boolean getIsBooked() {
         return isBooked;
     }
 

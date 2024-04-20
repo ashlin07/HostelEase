@@ -1,23 +1,26 @@
 package com.management.hostelease.services;
 
 import com.management.hostelease.model.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
-class HostelFacade {
-    private final RoomService roomService;
-    private final BlockService blockService;
-    private final HostelService hostelService;
-    private final RoomFactoryProvider roomFactoryProvider;
+public class HostelFacade {
+    @Autowired
+    private  RoomService roomService;
+    @Autowired
+    private BlockService blockService;
+    @Autowired
+    private  HostelService hostelService;
+    @Autowired
+    private RoomFactoryProvider roomFactoryProvider;
 
-    public HostelFacade(RoomService roomService, BlockService blockService, HostelService hostelService, RoomFactoryProvider roomFactoryProvider) {
-        this.roomService = roomService;
-        this.blockService = blockService;
-        this.hostelService = hostelService;
-        this.roomFactoryProvider = roomFactoryProvider;
-    }
 
-    public Room addRoom(Block block, RoomType roomType, int roomNumber, int capacity) {
+
+    public Room addRoom(String blockName, RoomType roomType, int roomNumber, int capacity) {
+        Block block = blockService.getBlockByName(blockName);
         RoomFactory roomFactory = roomFactoryProvider.getRoomFactory(roomType);
         Room room = roomFactory.createRoom(roomType, roomNumber, block);
         blockService.addRoom(block, room);
@@ -32,14 +35,21 @@ class HostelFacade {
         roomService.removeStudent(room, student);
     }
 
-    public void bookRoom(Room room) {
-        roomService.bookRoom(room);
+    public void bookRoom(Room room,String student) {
+        roomService.bookRoom(room,student);
     }
 
-    public Block addBlock(String blockName) {
-        Block block = new Block(blockName);
+    public Block addBlock(String blockName,int price) {
+        Block block = new Block(blockName,price);
         Hostel hostel = new Hostel(); // Or get the existing hostel instance
         hostelService.addBlock(hostel, block);
         return block;
+    }
+    public List<Room> showAllRooms() {
+        return roomService.showAllRooms();
+    }
+
+    public List<Room> showAvailableRooms() {
+        return roomService.showAllAvailableRooms();
     }
 }

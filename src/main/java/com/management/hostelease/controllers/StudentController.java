@@ -10,12 +10,4 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api")
 public class StudentController {
 
-    @Autowired
-    private StudentService studentService;
-
-    @PostMapping("/student")
-    public ResponseEntity<Student> addStudent(@RequestBody Student student) {
-        Student savedStudent = studentService.addStudent(student);
-        return ResponseEntity.ok(savedStudent);
-    }
 }

@@ -1,5 +1,6 @@
 package com.management.hostelease.services;
 
+import com.management.hostelease.model.ConcreteStudent;
 import com.management.hostelease.model.Student;
 import com.management.hostelease.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,15 +14,15 @@ public class StudentServiceImp implements StudentService {
     @Autowired
     private StudentRepository studentRepository;
 
-    public Student addStudent(Student student) {
+    public ConcreteStudent addStudent(ConcreteStudent student) {
         return studentRepository.save(student);
     }
 
-    public List<Student> getAllStudents() {
+    public List<ConcreteStudent> getAllStudents() {
         return studentRepository.findAll();
     }
 
-    public Optional<Student> getStudentById(int id) {
+    public Optional<ConcreteStudent> getStudentById(int id) {
         return studentRepository.findById(id);
     }
 }

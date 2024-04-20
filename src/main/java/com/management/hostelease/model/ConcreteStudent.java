@@ -3,7 +3,7 @@ package com.management.hostelease.model;
 import jakarta.persistence.*;
 
 @Entity
-public class ConcreteStudent implements Student {
+public class ConcreteStudent implements Student{
     @Id
     private int Srn;
     private String name;

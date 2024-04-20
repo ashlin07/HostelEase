@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface BlockService {
     void addRoom(Block block, Room room);
+    Block getBlockByName(String blockName);
 }

@@ -10,16 +10,5 @@ import java.util.List;
 @RequestMapping("/api")
 public class BlockController {
 
-    @Autowired
-    private BlockService blockService;
 
-    @GetMapping("/block")
-    public List<Block> getAllBlocks() {
-        return blockService.getAllBlocks();
-    }
-
-    @PostMapping("/block")
-    public Block addBlock(@RequestBody Block block) {
-        return blockService.addBlock(block);
-    }
 }
