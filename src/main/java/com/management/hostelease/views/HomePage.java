@@ -3,7 +3,13 @@ package com.management.hostelease.views;
 import com.vaadin.flow.component.applayout.AppLayout;
 import com.vaadin.flow.component.applayout.DrawerToggle;
 import com.vaadin.flow.component.html.*;
+import com.vaadin.flow.component.icon.Icon;
+import com.vaadin.flow.component.icon.VaadinIcon;
+import com.vaadin.flow.component.orderedlayout.FlexComponent;
+import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.login.LoginForm;
 import com.vaadin.flow.router.Route;
 
 @Route("homepage")
@@ -14,9 +20,17 @@ public class HomePage extends AppLayout {
         Nav nav = new Nav();
         UnorderedList list = new UnorderedList();
 
-        ListItem roomItem = new ListItem(new Anchor("room", "Room"));
-        ListItem messItem = new ListItem(new Anchor("mess", "Mess"));
-        ListItem attendanceItem = new ListItem(new Anchor("attendance", "Attendance"));
+        Anchor roomAnchor = new Anchor("room", "Room");
+        roomAnchor.add(new Icon(VaadinIcon.HOME));
+        ListItem roomItem = new ListItem(roomAnchor);
+
+        Anchor messAnchor = new Anchor("mess", "Mess");
+        messAnchor.add(new Icon(VaadinIcon.BOOK));
+        ListItem messItem = new ListItem(messAnchor);
+
+        Anchor attendanceAnchor = new Anchor("attendance", "Attendance");
+        attendanceAnchor.add(new Icon(VaadinIcon.CALENDAR));
+        ListItem attendanceItem = new ListItem(attendanceAnchor);
 
         list.add(roomItem, messItem, attendanceItem);
         nav.add(list);
@@ -29,52 +43,80 @@ public class HomePage extends AppLayout {
 
         // Styling for the content layout
         contentLayout.getStyle().set("padding", "20px");
-
-        // Create a layout for the image and content
-        Div imageAndContentLayout = new Div();
-
-        // Styling for the image and content layout
-        imageAndContentLayout.getStyle().set("display", "flex");
-        imageAndContentLayout.getStyle().set("justify-content", "space-between");
-        imageAndContentLayout.getStyle().set("align-items", "center");
-        imageAndContentLayout.getStyle().set("padding-bottom", "20px");
+        contentLayout.getStyle().set("text-align", "center");
 
         // Add the main image
         Image mainImage = new Image("/hostel.jpg", "Main Image");
         mainImage.setWidth("50%"); // Adjust the width as needed
-        imageAndContentLayout.add(mainImage);
-
-        // Create a layout for the text content
-        Div textContentLayout = new Div();
-
-        // Styling for the text content layout
-        textContentLayout.getStyle().set("flex-grow", "1");
-        textContentLayout.getStyle().set("padding", "20px");
+        contentLayout.add(mainImage);
 
         // Add text content
         H2 welcomeText = new H2("Welcome to PES University Hostel Management System");
-
-        // Styling for the welcome text
         welcomeText.getStyle().set("color", "#333");
         welcomeText.getStyle().set("font-size", "24px");
         welcomeText.getStyle().set("font-weight", "bold");
         welcomeText.getStyle().set("margin-bottom", "10px");
 
         Paragraph description = new Paragraph("Manage your hostel stay seamlessly. Book your mess, rooms, and give attendance effortlessly.");
-
-        // Styling for the description
         description.getStyle().set("color", "#666");
         description.getStyle().set("font-size", "18px");
 
-        textContentLayout.add(welcomeText, description);
+        // Add buttons
+        Button bookMessButton = new Button("Book Mess");
+        Button bookRoomButton = new Button("Book Room");
+        Button attendanceButton = new Button("Attendance");
 
-        // Add the text content layout to the main layout
-        imageAndContentLayout.add(textContentLayout);
+        // Style the buttons
+        bookMessButton.getStyle().set("background-color", "#4CAF50");
+        bookMessButton.getStyle().set("color", "white");
+        bookMessButton.getStyle().set("padding", "10px 24px");
+        bookMessButton.getStyle().set("text-align", "center");
+        bookMessButton.getStyle().set("text-decoration", "none");
+        bookMessButton.getStyle().set("display", "inline-block");
+        bookMessButton.getStyle().set("font-size", "16px");
+        bookMessButton.getStyle().set("margin", "4px 2px");
+        bookMessButton.getStyle().set("cursor", "pointer");
+        bookMessButton.getStyle().set("border-radius", "12px");
 
-        // Add the image and content layout to the content layout
-        contentLayout.add(imageAndContentLayout);
+        bookRoomButton.getStyle().set("background-color", "#008CBA");
+        bookRoomButton.getStyle().set("color", "white");
+        bookRoomButton.getStyle().set("padding", "10px 24px");
+        bookRoomButton.getStyle().set("text-align", "center");
+        bookRoomButton.getStyle().set("text-decoration", "none");
+        bookRoomButton.getStyle().set("display", "inline-block");
+        bookRoomButton.getStyle().set("font-size", "16px");
+        bookRoomButton.getStyle().set("margin", "4px 2px");
+        bookRoomButton.getStyle().set("cursor", "pointer");
+        bookRoomButton.getStyle().set("border-radius", "12px");
 
-        // Set the content layout as the content of the page
+        attendanceButton.getStyle().set("background-color", "#f44336");
+        attendanceButton.getStyle().set("color", "white");
+        attendanceButton.getStyle().set("padding", "10px 24px");
+        attendanceButton.getStyle().set("text-align", "center");
+        attendanceButton.getStyle().set("text-decoration", "none");
+        attendanceButton.getStyle().set("display", "inline-block");
+        attendanceButton.getStyle().set("font-size", "16px");
+        attendanceButton.getStyle().set("margin", "4px 2px");
+        attendanceButton.getStyle().set("cursor", "pointer");
+        attendanceButton.getStyle().set("border-radius", "12px");
+
+        // Add login form
+        LoginForm loginForm = new LoginForm();
+
+        // Create a layout for the buttons
+        HorizontalLayout buttonsLayout = new HorizontalLayout();
+        buttonsLayout.add(bookMessButton, bookRoomButton, attendanceButton);
+        buttonsLayout.setAlignItems(FlexComponent.Alignment.CENTER);
+
+        // Create a layout for the login form
+        VerticalLayout loginFormLayout = new VerticalLayout();
+        loginFormLayout.add(loginForm);
+        loginFormLayout.setAlignItems(FlexComponent.Alignment.CENTER);
+
+        // Add components to content layout
+        contentLayout.add(welcomeText, description, buttonsLayout, loginFormLayout);
+
+        // Add content layout to the page
         setContent(contentLayout);
     }
 }
