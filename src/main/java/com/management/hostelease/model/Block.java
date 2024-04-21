@@ -27,7 +27,9 @@ public class Block {
     public int getPrice() {
         return price;
     }
-
+    public String getName() {
+        return name;
+    }
     public void addRoom(Room room) {
         this.rooms.add(room);
         room.setBlock(this);

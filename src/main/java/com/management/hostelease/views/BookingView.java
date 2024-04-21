@@ -38,7 +38,7 @@ public class BookingView extends VerticalLayout {
 
     private void listAvailableRooms() {
 
-        Room[] rooms = restTemplate.getForObject("http://localhost:8080/api/availableRooms", Room[].class);
+        Room[] rooms = restTemplate.getForObject("http://localhost:8080/api/room/showAvailable", Room[].class);
         List<Room> availableRooms = Arrays.asList(rooms != null ? rooms : new Room[0]);
         grid.setItems(availableRooms);
         grid.addComponentColumn(this::createBookButton);
@@ -59,7 +59,7 @@ public class BookingView extends VerticalLayout {
                 payment.setStudentId(Integer.parseInt(studentIdField.getValue()));
                 payment.setFormOfPayment(formOfPaymentField.getValue());
                 RestTemplate restTemplate=new RestTemplate();
-                restTemplate.postForObject("http://localhost:8080/api/bookRoom", payment, Void.class);
+                restTemplate.postForObject("http://localhost:8080/api/room/book", payment, Void.class);
                 paymentDialog.close();
             });
 

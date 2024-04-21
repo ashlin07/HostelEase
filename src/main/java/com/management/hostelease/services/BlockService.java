@@ -6,7 +6,7 @@ import com.management.hostelease.model.Room;
 import java.util.List;
 
 public interface BlockService {
-    void addRoom(Block block, Room room);
+    void addRoom(String block, Room room);
     Block getBlockByName(String blockName);
     List<Block> getAllBlocks();
 }

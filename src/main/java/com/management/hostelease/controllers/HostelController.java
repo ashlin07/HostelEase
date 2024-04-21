@@ -1,6 +1,7 @@
 package com.management.hostelease.controllers;
 
 import com.management.hostelease.model.Block;
+import com.management.hostelease.model.Payment;
 import com.management.hostelease.model.Room;
 import com.management.hostelease.model.RoomType;
 import com.management.hostelease.services.HostelFacade;
@@ -30,13 +31,17 @@ public class HostelController {
         return hostelFacade.getAllBlocks();
     }
     @PostMapping("/room")
-    public Room addRoom(@RequestParam String blockName, @RequestParam RoomType roomType, @RequestParam int roomNumber, @RequestParam int capacity) {
-        return hostelFacade.addRoom(blockName, roomType, roomNumber, capacity);
+    public Room addRoom(@RequestParam String blockName, @RequestParam RoomType roomType, @RequestParam int roomNumber) {
+        return hostelFacade.addRoom(blockName, roomType, roomNumber);
     }
 
     @PostMapping("/room/addStudent")
-    public void addStudent(@RequestBody Room room, @RequestParam String student) {
-        hostelFacade.addStudent(room, student);
+    public void addStudentToRoom(@RequestBody Room room, @RequestParam String student) {
+        hostelFacade.addStudentToRoom(room, student);
+    }
+    @PostMapping("/addStudent")
+    public void addStudent(@RequestParam String name, @RequestParam int srn, @RequestParam String department) {
+        hostelFacade.addStudent(name, srn, department);
     }
 
     @PostMapping("/room/removeStudent")
@@ -45,7 +50,9 @@ public class HostelController {
     }
 
     @PostMapping("/room/book")
-    public void bookRoom(@RequestBody Room room, @RequestParam String student) {
+    public void bookRoom(@RequestBody Payment payment) {
+        Room room=hostelFacade.getRoomById(payment.getRoomId());
+        String student=hostelFacade.getStudentNameById(payment.getStudentId());
         hostelFacade.bookRoom(room, student);
     }
 
@@ -53,7 +60,7 @@ public class HostelController {
     public List<Room> showAllRooms() {
         return hostelFacade.showAllRooms();
     }
-    @GetMapping("/room/showAvailabe")
+    @GetMapping("/room/showAvailable")
     public List<Room>showAvailableRooms() {
         return hostelFacade.showAvailableRooms();
     }

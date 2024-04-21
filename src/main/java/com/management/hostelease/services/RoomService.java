@@ -10,4 +10,6 @@ public interface RoomService {
     Room bookRoom(Room room, String student);
     List<Room>showAllRooms();
     List<Room> showAllAvailableRooms();
+
+    Room getRoomById(int id);
 }

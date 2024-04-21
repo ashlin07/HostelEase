@@ -41,7 +41,7 @@ public class RoomServiceImp implements RoomService {
         ConcreteStudent student = studentRepository.findByName(studentName);
 
         // Set the student's room number
-        student.setRoomNumber(room.getRoomNumber());
+        student.setRoom(room);
         // Implementation goes here
         addStudent(room, studentName);
 
@@ -66,5 +66,10 @@ public class RoomServiceImp implements RoomService {
     public List<Room> showAllAvailableRooms() {
         // Implementation goes here
         return roomRepository.findByIsBooked(false);
+    }
+    @Override
+    public Room getRoomById(int id) {
+        // Implementation goes here
+        return roomRepository.findById(id).orElse(null);
     }
 }

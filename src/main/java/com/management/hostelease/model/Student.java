@@ -5,5 +5,5 @@ public interface Student {
     int getSrn();
     String getDepartment();
     int getRoomNumber();
-    void setRoomNumber(int roomNumber);
+
 }

@@ -8,13 +8,14 @@ public class ConcreteStudent implements Student{
     private int Srn;
     private String name;
     private String department;
-    private int roomNumber;
+    @ManyToOne
+    private Room room;
     public ConcreteStudent() {}
     public ConcreteStudent(StudentBuilder builder) {
         this.name = builder.getName();
         this.Srn = builder.getSrn();
         this.department = builder.getDepartment();
-        this.roomNumber = builder.getRoomNumber();
+
     }
 
     // Getters for the properties
@@ -22,18 +23,16 @@ public class ConcreteStudent implements Student{
     public int getSrn() { return Srn; }
     public String getDepartment() { return department; }
 
-    public int getRoomNumber() { return roomNumber; }
+    public int getRoomNumber() { return room.getRoomNumber(); }
+    public void setRoom(Room room) { this.room = room; }
 
-    public void setRoomNumber(int roomNumber){
-        this.roomNumber = roomNumber;
-    }
     // Static nested class: ConcreteStudentBuilder
-    static class ConcreteStudentBuilder implements StudentBuilder {
+    public static class ConcreteStudentBuilder implements StudentBuilder {
         private String name;
         private int Srn;
         private String department;
 
-        private int roomNumber;
+
 
         public StudentBuilder setName(String name) {
             this.name = name;
@@ -52,16 +51,13 @@ public class ConcreteStudent implements Student{
 
 
 
-        public StudentBuilder setRoomNumber(int roomNumber) {
-            this.roomNumber = roomNumber;
-            return this;
-        }
+
 
         public String getName() { return name; }
         public int getSrn() { return Srn; }
         public String getDepartment() { return department; }
 
-        public int getRoomNumber() { return roomNumber; }
+
 
         public Student build() {
             return new ConcreteStudent(this);

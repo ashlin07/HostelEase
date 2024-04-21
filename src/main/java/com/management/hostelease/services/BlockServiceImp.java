@@ -14,8 +14,9 @@ public class BlockServiceImp implements BlockService {
     private  BlockRepository blockRepository;
 
     @Override
-    public void addRoom(Block block, Room room) {
+    public void addRoom(String blockName, Room room) {
         // Implementation goes here
+        Block block = blockRepository.findByName(blockName);
         block.addRoom(room);
         blockRepository.save(block);
     }

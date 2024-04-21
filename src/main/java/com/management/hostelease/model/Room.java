@@ -11,7 +11,7 @@ import java.util.List;
 public class Room {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private int id;
     private int roomNumber;
     @ManyToOne
     @JoinColumn(name = "block_id")
@@ -41,11 +41,11 @@ public class Room {
 
     // Getters and setters
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 

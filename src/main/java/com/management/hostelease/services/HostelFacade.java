@@ -5,11 +5,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class HostelFacade {
     @Autowired
     private  RoomService roomService;
+    @Autowired
+    private StudentService studentService;
     @Autowired
     private BlockService blockService;
     @Autowired
@@ -19,17 +22,18 @@ public class HostelFacade {
 
 
 
-    public Room addRoom(String blockName, RoomType roomType, int roomNumber, int capacity) {
+    public Room addRoom(String blockName, RoomType roomType, int roomNumber) {
         Block block = blockService.getBlockByName(blockName);
         RoomFactory roomFactory = roomFactoryProvider.getRoomFactory(roomType);
         Room room = roomFactory.createRoom(roomType, roomNumber, block);
-        blockService.addRoom(block, room);
+        blockService.addRoom(blockName, room);
         return room;
     }
 
-    public void addStudent(Room room, String student) {
+    public void addStudentToRoom(Room room, String student) {
         roomService.addStudent(room, student);
     }
+
 
     public void removeStudent(Room room, String student) {
         roomService.removeStudent(room, student);
@@ -54,5 +58,15 @@ public class HostelFacade {
     }
     public List<Block> getAllBlocks() {
         return blockService.getAllBlocks();
+    }
+    public Room getRoomById(int id) {
+        return roomService.getRoomById(id);
+    }
+    public String getStudentNameById(int id) {
+        return studentService.getStudentNameById(id);
+    }
+
+    public void addStudent(String name, int srn, String department) {
+        studentService.addStudent(name, srn, department);
     }
 }
