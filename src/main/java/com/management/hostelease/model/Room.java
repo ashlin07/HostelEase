@@ -5,10 +5,12 @@ import jakarta.persistence.*;
 
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Entity
-public class Room {
+public class Room implements Observer{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
@@ -23,8 +25,11 @@ public class Room {
     @ElementCollection
     private List<String> students;
 
+    private Map<String, boolean[]> attendanceMap;
+
     public Room() {
         this.students = new ArrayList<>();
+        this.attendanceMap = new HashMap<>();
     }
     public Room(int roomNumber,Block block,String roomType,int capacity) {
         this.roomNumber = roomNumber;
@@ -32,9 +37,16 @@ public class Room {
         this.roomType = roomType;
         this.capacity = capacity;
         this.students = new ArrayList<>();
+        this.attendanceMap = new HashMap<>();
 
     }
-
+    @Override
+    public void update(String studentName, int day, boolean present) {
+        boolean[] attendance = attendanceMap.get(studentName);
+        if (attendance != null && day >= 0 && day < attendance.length) {
+            attendance[day] = present;
+        }
+    }
 
 
 
@@ -95,5 +107,9 @@ public class Room {
 
     public void setStudents(List<String> students) {
         this.students = students;
+    }
+
+    public Map<String, boolean[]> getAttendanceMap() {
+        return attendanceMap;
     }
 }
