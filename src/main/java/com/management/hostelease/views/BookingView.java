@@ -41,6 +41,7 @@ public class BookingView extends VerticalLayout {
         Room[] rooms = restTemplate.getForObject("http://localhost:8080/api/room/showAvailable", Room[].class);
         List<Room> availableRooms = Arrays.asList(rooms != null ? rooms : new Room[0]);
         grid.setItems(availableRooms);
+        grid.addColumn(room -> room.getBlock().getPrice()).setHeader("Block Price");
         grid.addComponentColumn(this::createBookButton);
     }
     private Button createBookButton(Room room) {

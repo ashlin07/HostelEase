@@ -12,11 +12,11 @@ public class AddStudentView extends FormLayout {
     private TextField nameField = new TextField("Name");
     private TextField srnField = new TextField("SRN");
     private TextField departmentField = new TextField("Department");
-    private TextField roomNumberField = new TextField("Room Number");
+
     private Button submitButton = new Button("Submit");
 
     public AddStudentView() {
-        add(nameField, srnField, departmentField, roomNumberField, submitButton);
+        add(nameField, srnField, departmentField, submitButton);
 
         submitButton.addClickListener(event -> {
             String name = nameField.getValue();
@@ -26,8 +26,7 @@ public class AddStudentView extends FormLayout {
             RestTemplate restTemplate = new RestTemplate();
             String url = "http://localhost:8080/api/addStudent?name=" + name + "&srn=" + srn + "&department=" + department;
             restTemplate.postForObject(url, null, Void.class);
-            // Call the method to add a student
-            // hostelFacade.addStudent(name, srn, department, roomNumber);
+
 
             Notification.show("Student added successfully");
         });
