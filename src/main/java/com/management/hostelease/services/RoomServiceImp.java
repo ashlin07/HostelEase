@@ -20,6 +20,7 @@ public class RoomServiceImp implements RoomService {
         // Implementation goes here
         if (room.getStudents().size() < room.getCapacity()) {
             room.getStudents().add(student);
+            room.getAttendanceMap().put(student, new boolean[30]);
         } else {
             System.out.println("Room is already at full capacity.");
         }
