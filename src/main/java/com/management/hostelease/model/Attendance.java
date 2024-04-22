@@ -7,7 +7,7 @@ import jakarta.persistence.*;
 public class Attendance {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private int id;
 
     @ManyToOne
     @JoinColumn(name = "room_id")
@@ -15,7 +15,7 @@ public class Attendance {
 
     private String studentName;
 
-    @Column(columnDefinition = "BOOLEAN[]")
+    @Convert(converter = BooleanArrayToStringConverter.class)
     private boolean[] attendanceArray;
 
     public Attendance() {
