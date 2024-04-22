@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class AttendanceRegister {
+public class AttendanceRegister implements AttendanceService{
     private List<Observer> observers;
 
     public AttendanceRegister() {

@@ -1,5 +1,6 @@
 package com.management.hostelease.services;
 
+import com.management.hostelease.model.Attendance;
 import com.management.hostelease.model.ConcreteStudent;
 import com.management.hostelease.model.Room;
 import com.management.hostelease.repository.RoomRepository;
@@ -20,7 +21,11 @@ public class RoomServiceImp implements RoomService {
         // Implementation goes here
         if (room.getStudents().size() < room.getCapacity()) {
             room.getStudents().add(student);
-            room.getAttendanceMap().put(student, new boolean[30]);
+            Attendance attendance = new Attendance();
+            attendance.setRoom(room);
+            attendance.setStudentName(student);
+            attendance.setAttendanceArray(new boolean[30]); // Initialize attendance array
+            room.getAttendances().add(attendance);
         } else {
             System.out.println("Room is already at full capacity.");
         }

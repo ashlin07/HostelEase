@@ -4,10 +4,7 @@ package com.management.hostelease.model;
 import jakarta.persistence.*;
 
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Entity
 public class Room implements Observer{
@@ -25,11 +22,13 @@ public class Room implements Observer{
     @ElementCollection
     private List<String> students;
 
-    private Map<String, boolean[]> attendanceMap;
+    @OneToMany(mappedBy = "room", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Attendance> attendances;
 
     public Room() {
         this.students = new ArrayList<>();
-        this.attendanceMap = new HashMap<>();
+        this.attendances = new ArrayList<>();
+
     }
     public Room(int roomNumber,Block block,String roomType,int capacity) {
         this.roomNumber = roomNumber;
@@ -37,22 +36,33 @@ public class Room implements Observer{
         this.roomType = roomType;
         this.capacity = capacity;
         this.students = new ArrayList<>();
-        this.attendanceMap = new HashMap<>();
-
+    }
+    private Attendance findAttendanceByStudentName(String studentName) {
+        return attendances.stream()
+                .filter(a -> a.getStudentName().equals(studentName))
+                .findFirst()
+                .orElse(null);
     }
     @Override
     public void update(String studentName, int day, boolean present) {
-        boolean[] attendance = attendanceMap.get(studentName);
-        if (attendance != null && day >= 0 && day < attendance.length) {
-            attendance[day] = present;
+        Attendance attendance = findAttendanceByStudentName(studentName);
+        if (attendance != null && day >= 0 && day < attendance.getAttendanceArray().length) {
+            attendance.getAttendanceArray()[day] = present;
         }
     }
 
 
 
 
-    // Getters and setters
 
+
+
+
+
+    // Getters and setters
+    public List<Attendance> getAttendances(){
+        return attendances;
+    }
     public int getId() {
         return id;
     }
@@ -109,7 +119,5 @@ public class Room implements Observer{
         this.students = students;
     }
 
-    public Map<String, boolean[]> getAttendanceMap() {
-        return attendanceMap;
-    }
+
 }
